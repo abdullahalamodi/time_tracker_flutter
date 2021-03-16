@@ -1,0 +1,36 @@
+[33mcommit 91492e7b6eee0e02a3c6a74120939abf40a21caa[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: alamodi <abdullah.alamodi@bootfi.com>
+Date:   Sun Mar 14 15:24:07 2021 +0300
+
+    add changeNotifire as second way of state mangement
+
+[33mcommit 3ec6f9ecb743129a967b7d580aed42b6fa38b33a[m
+Author: alamodi <abdullah.alamodi@bootfi.com>
+Date:   Sun Mar 14 13:40:33 2021 +0300
+
+    convert emailSignIn code from setState to bloc
+
+[33mcommit c2728061b0630ece40ceb44e2d0e344de1019b79[m
+Merge: 611a9ef f53763a
+Author: alamodi <abdullah.alamodi@bootfi.com>
+Date:   Sun Mar 14 10:22:30 2021 +0300
+
+    Merge branch 'main' of https://github.com/abdullahalamodi/time_tracker_flutter into main
+
+[33mcommit 611a9ef631261bb8ba070ba86a5ad22c3d1479fc[m
+Author: alamodi <abdullah.alamodi@bootfi.com>
+Date:   Sun Mar 14 10:17:34 2021 +0300
+
+    add authentication with google facebook emailand password
+
+[33mcommit f53763a9184346c8146191c03f36b10c4e666ea7[m
+Author: Abdullah Alamodi <39647459+abdullahalamodi@users.noreply.github.com>
+Date:   Sun Mar 14 10:15:10 2021 +0300
+
+    Update README.md
+
+[33mcommit 2d7743f6947ee31b25090fc345beab386d0bd91a[m
+Author: alamodi <abdullah.alamodi@bootfi.com>
+Date:   Sun Mar 14 10:11:56 2021 +0300
+
+    first commit

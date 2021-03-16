@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:time_tracker_flutter_course/app/sign_in/with_bloc/email_sign_in_bloc.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/with_change_notifire/email_sign_in_change_notifire_model.dart';
 import 'package:time_tracker_flutter_course/common_widgets/form_submit_button.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
@@ -16,8 +15,9 @@ class EmailSignInFormWithChangeNotifire extends StatefulWidget {
     final auth = Provider.of<AuthBase>(context, listen: false);
     return ChangeNotifierProvider<EmailSignInChangeNotifireModel>(
       create: (_) => EmailSignInChangeNotifireModel(auth: auth),
-      child: Consumer<EmailSignInBloc>(
-        builder: (_, viewmodel, __) => EmailSignInFormWithChangeNotifire(),
+      child: Consumer<EmailSignInChangeNotifireModel>(
+        builder: (_, viewmodel, __) =>
+            EmailSignInFormWithChangeNotifire(viewmodel: viewmodel),
       ),
     );
   }
