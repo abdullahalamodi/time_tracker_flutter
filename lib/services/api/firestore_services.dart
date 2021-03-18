@@ -17,13 +17,20 @@ class FirestoreServices {
 
   Stream<List<T>> clollectionStream<T>({
     @required String path,
-    @required T Function(Map<String, dynamic> data) builder,
+    @required T Function(Map<String, dynamic> data, String docId) builder,
   }) {
     final refernce = FirebaseFirestore.instance.collection(path);
     final snapshots = refernce.snapshots();
     return snapshots.map(
       (collection) =>
-          collection.docs.map((doc) => builder(doc.data())).toList(),
+          collection.docs.map((doc) => builder(doc.data(), doc.id)).toList(),
     );
+  }
+
+  Future<void> deleteData({
+    @required String path,
+  }) async {
+    final refernce = FirebaseFirestore.instance.doc(path);
+    await refernce.delete();
   }
 }

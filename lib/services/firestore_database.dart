@@ -1,14 +1,12 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:time_tracker_flutter_course/app/models/job.dart';
-import 'package:time_tracker_flutter_course/services/api_path.dart';
-import 'package:time_tracker_flutter_course/services/firestore_services.dart';
+import 'package:time_tracker_flutter_course/services/api/api_path.dart';
+import 'package:time_tracker_flutter_course/services/api/firestore_services.dart';
 
 abstract class Database {
-  Future<void> createJop(Job job);
+  Future<void> setJob(Job job);
   Stream<List<Job>> jobsStream();
+  Future<void> deleteJob(Job job);
 }
 
 class FirestoreDatabase extends Database {
@@ -18,12 +16,17 @@ class FirestoreDatabase extends Database {
   final services = FirestoreServices.instance;
 
   @override
-  Future<void> createJop(Job job) =>
-      services.setData(apiPath: ApiPath.job(uid, 'jobId'), data: job.toMap());
+  Future<void> setJob(Job job) =>
+      services.setData(apiPath: ApiPath.job(uid, job.id), data: job.toMap());
 
   @override
   Stream<List<Job>> jobsStream() => services.clollectionStream<Job>(
         path: ApiPath.jobs(uid),
-        builder: (data) => Job.fromMap(data),
+        builder: (data, id) => Job.fromMap(data, id: id),
+      );
+
+  @override
+  Future<void> deleteJob(Job job) => services.deleteData(
+        path: ApiPath.job(uid, job.id),
       );
 }

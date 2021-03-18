@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:time_tracker_flutter_course/app/sign_in/with_bloc/email_sign_in_model.dart';
-import 'package:time_tracker_flutter_course/app/sign_in/validators.dart';
+import 'package:time_tracker_flutter_course/app/utils/validators.dart';
 import 'package:time_tracker_flutter_course/services/auth.dart';
 
 //also called contoller or viewmodel
