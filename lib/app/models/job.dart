@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:time_tracker_flutter_course/app/utils/validators.dart';
 
 class Job with JobValidators {
-  String id = Job._jobIdGenerator;
-  String name;
-  int rateperHour;
+  final String id;
+  final String name;
+  final int rateperHour;
 
   Job({
     this.id,
@@ -37,16 +37,16 @@ class Job with JobValidators {
 
   factory Job.fromJson(String source) => Job.fromMap(json.decode(source));
 
-  Job updateWith({
+  Job copyWith({
     String id,
     String name,
     int ratePerHour,
-  }) {
-    this.id = id ?? this.id;
-    this.name = name ?? this.name;
-    this.rateperHour = ratePerHour ?? this.rateperHour;
-    return this;
-  }
+  }) =>
+      Job(
+        id: id ?? this.id ?? _jobIdGenerator,
+        name: name ?? this.name,
+        rateperHour: ratePerHour ?? this.rateperHour,
+      );
 
   static String get _jobIdGenerator => DateTime.now().toIso8601String();
 }

@@ -31,6 +31,10 @@ class JobsViewmodel with ChangeNotifier {
     return jobsStream;
   }
 
+  Future<void> delete(Job item) async {
+    await database.deleteJob(job);
+  }
+
   Future<bool> _existedJobName() async {
     final jobs = await database.jobsStream().first;
     final List<String> names = jobs.map((e) => e.name).toList();
@@ -41,20 +45,20 @@ class JobsViewmodel with ChangeNotifier {
   String get ratePerHourValidator =>
       _job.validRatePerHour ? null : _job.invalidRateErrorText;
 
-  void updateName(String name) => updateWith(job: _job.updateWith(name: name));
+  void updateName(String name) => updateWith(job: _job.copyWith(name: name));
   void updateRate(int ratePerHour) =>
-      updateWith(job: _job.updateWith(ratePerHour: ratePerHour));
+      updateWith(job: _job.copyWith(ratePerHour: ratePerHour));
 
   void updateWith({
     bool isLoading,
     bool isEditing,
     Job job,
-    bool notifiy: true,
+    bool notify: true,
   }) {
     this._isLoading = isLoading ?? this.isLoading;
     this._isEditing = isEditing ?? this.isEditing;
     this._job = job ?? this.job;
-    if (notifiy) notifyListeners();
+    if (notify) notifyListeners();
   }
 
   //getters

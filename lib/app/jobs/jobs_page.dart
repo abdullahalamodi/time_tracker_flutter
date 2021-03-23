@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:time_tracker_flutter_course/app/job_entries/entries_page.dart';
 import 'package:time_tracker_flutter_course/app/jobs/add_job_bage.dart';
 import 'package:time_tracker_flutter_course/app/jobs/job_list_item.dart';
 import 'package:time_tracker_flutter_course/app/jobs/jobs_viewmodel.dart';
@@ -77,8 +78,8 @@ class JobsPage extends StatelessWidget {
               child: JobListItem(
                 onTap: () {
                   viewmodel.updateWith(
-                      job: item, isEditing: true, notifiy: false);
-                  AddJobPage.create(context);
+                      job: item, isEditing: true, notify: false);
+                  EntriesPage.create(context);
                 },
                 job: item,
               ),
@@ -107,7 +108,8 @@ class JobsPage extends StatelessWidget {
       ),
       body: _buildContent(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => AddJobPage.create(context),
+        onPressed: () => AddJobPage.create(
+            context, viewmodel), //check if lesten true use provider.of...
         child: Icon(Icons.add),
       ),
     );

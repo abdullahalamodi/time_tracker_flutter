@@ -18,7 +18,8 @@ class ListItemBuilder<T> extends StatelessWidget {
     if (snapshot.hasData) {
       final items = snapshot.data;
       return items.isNotEmpty
-          ? ListView.builder(
+          ? ListView.separated(
+              separatorBuilder: (_, __) => Divider(height: 0.5),
               itemCount: items.length,
               itemBuilder: (context, i) => itemBuilder(context, items[i]),
             )

@@ -18,9 +18,12 @@ class FirestoreServices {
   Stream<List<T>> clollectionStream<T>({
     @required String path,
     @required T Function(Map<String, dynamic> data, String docId) builder,
+    Query Function(Query query) queryBuilder,
   }) {
-    final refernce = FirebaseFirestore.instance.collection(path);
-    final snapshots = refernce.snapshots();
+    Query query = FirebaseFirestore.instance.collection(path);
+    if (queryBuilder != null)
+      query = queryBuilder(query); //reuse query to filter it
+    final snapshots = query.snapshots();
     return snapshots.map(
       (collection) =>
           collection.docs.map((doc) => builder(doc.data(), doc.id)).toList(),

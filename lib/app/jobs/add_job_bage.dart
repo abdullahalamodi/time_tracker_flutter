@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/jobs/jobs_viewmodel.dart';
 import 'package:time_tracker_flutter_course/app/models/job.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
@@ -8,8 +7,8 @@ class AddJobPage extends StatefulWidget {
   AddJobPage({Key key, @required this.viewmodel}) : super(key: key);
   final JobsViewmodel viewmodel;
 
-  static Future<void> create(BuildContext context) async {
-    final viewmodel = Provider.of<JobsViewmodel>(context, listen: false);
+  static Future<void> create(
+      BuildContext context, JobsViewmodel viewmodel) async {
     await Navigator.of(context).push(MaterialPageRoute(
       builder: (_) => AddJobPage(viewmodel: viewmodel),
       fullscreenDialog: true,
@@ -31,7 +30,7 @@ class _AddJobPageState extends State<AddJobPage> {
   void dispose() {
     _nameFocusNode.dispose();
     _rateFocusNode.dispose();
-    _viewmodel.updateWith(job: Job(), notifiy: false);
+    _viewmodel.updateWith(job: widget.viewmodel.job, notify: false);
     super.dispose();
   }
 
