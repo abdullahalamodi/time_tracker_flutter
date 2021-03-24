@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker_flutter_course/app/home/cupertino_navigation_scaffold.dart';
 import 'package:time_tracker_flutter_course/app/home/tab_item.dart';
 import 'package:time_tracker_flutter_course/app/jobs/jobs_page.dart';
+import 'package:time_tracker_flutter_course/app/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 final Map<TabItem, WidgetBuilder> navigationPages = {
   TabItem.jobs: (context) => JobsPage.create(context),
   TabItem.entries: (context) => Container(),
-  TabItem.profile: (context) => JobsPage.create(context),
+  TabItem.profile: (context) => ProfilePage(),
 };
 
 class _HomePageState extends State<HomePage> {

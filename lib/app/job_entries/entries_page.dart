@@ -15,20 +15,20 @@ class EntriesPage extends StatelessWidget {
 
   static Future<void> create(BuildContext context) async {
     final jobsViewmodel = Provider.of<JobsViewmodel>(context, listen: false);
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => ChangeNotifierProvider<EntriesViewModel>(
-            create: (_) => EntriesViewModel(
-                jobsViewmodel: jobsViewmodel, database: jobsViewmodel.database),
-            child: Consumer<EntriesViewModel>(
-              builder: (_, entriesViewmodel, __) => EntriesPage(
-                entriesViewModel: entriesViewmodel,
-              ),
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ChangeNotifierProvider<EntriesViewModel>(
+          create: (_) => EntriesViewModel(
+              jobsViewmodel: jobsViewmodel, database: jobsViewmodel.database),
+          child: Consumer<EntriesViewModel>(
+            builder: (_, entriesViewmodel, __) => EntriesPage(
+              entriesViewModel: entriesViewmodel,
             ),
           ),
-          fullscreenDialog: false,
-        ));
+        ),
+        fullscreenDialog: false,
+      ),
+    );
   }
 
   _delete(BuildContext context, Entry item) {}
@@ -63,24 +63,27 @@ class EntriesPage extends StatelessWidget {
         title: Text(entriesViewModel.job.name ?? ''),
         centerTitle: true,
         actions: [
-          TextButton(
-            child: Text(
-              'Edit',
-              style: TextStyle(color: Colors.white),
+          IconButton(
+            icon: Icon(
+              Icons.edit,
+              color: Colors.white,
             ),
             onPressed: () => AddJobPage.create(
               context,
               entriesViewModel.jobsViewmodel,
             ),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: () => AddEntryPage.create(context,
+                entriesViewModel), //check if lesten true use provider.of...
           )
         ],
       ),
       body: _buildContent(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AddEntryPage.create(context,
-            entriesViewModel), //check if lesten true use provider.of...
-        child: Icon(Icons.add),
-      ),
     );
   }
 }

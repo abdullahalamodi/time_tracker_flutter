@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker_flutter_course/app/job_entries/entries_page.dart';
@@ -8,9 +6,7 @@ import 'package:time_tracker_flutter_course/app/jobs/job_list_item.dart';
 import 'package:time_tracker_flutter_course/app/jobs/jobs_viewmodel.dart';
 import 'package:time_tracker_flutter_course/app/models/job.dart';
 import 'package:time_tracker_flutter_course/common_widgets/list_item_builder.dart';
-import 'package:time_tracker_flutter_course/common_widgets/show_alert_dialog.dart';
 import 'package:time_tracker_flutter_course/common_widgets/show_exception_alert_dialog.dart';
-import 'package:time_tracker_flutter_course/services/auth.dart';
 import 'package:time_tracker_flutter_course/services/firestore_database.dart';
 
 class JobsPage extends StatelessWidget {
@@ -26,28 +22,6 @@ class JobsPage extends StatelessWidget {
                 viewmodel: viewmodel,
               )),
     );
-  }
-
-  Future<void> _signOut(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.signOut();
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await showAlertDialog(
-      context,
-      title: 'Logout',
-      content: 'Are you sure that you want to logout?',
-      cancelActionText: 'Cancel',
-      defaultActionText: 'Logout',
-    );
-    if (didRequestSignOut == true) {
-      _signOut(context);
-    }
   }
 
   Future<void> _delete(BuildContext context, Job item) async {
@@ -94,24 +68,17 @@ class JobsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Jobes Page'),
         actions: <Widget>[
-          TextButton(
-            child: Text(
-              'Logout',
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
-              ),
+          IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
             ),
-            onPressed: () => _confirmSignOut(context),
+            onPressed: () => AddJobPage.create(
+                context, viewmodel), //check if lesten true use provider.of...
           ),
         ],
       ),
       body: _buildContent(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AddJobPage.create(
-            context, viewmodel), //check if lesten true use provider.of...
-        child: Icon(Icons.add),
-      ),
     );
   }
 }

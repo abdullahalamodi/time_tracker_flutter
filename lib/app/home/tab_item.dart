@@ -16,11 +16,9 @@ class TabItemData {
   final String title;
 
   static const Map<TabItem, TabItemData> allTabs = {
-    TabItem.jobs:
-        const TabItemData(icon: Icons.format_align_justify, title: 'Jobs'),
+    TabItem.jobs: const TabItemData(icon: Icons.work, title: 'Jobs'),
     TabItem.entries:
-        const TabItemData(icon: Icons.emoji_events_rounded, title: 'entries'),
-    TabItem.profile:
-        const TabItemData(icon: Icons.format_align_justify, title: 'profile'),
+        const TabItemData(icon: Icons.table_view, title: 'entries'),
+    TabItem.profile: const TabItemData(icon: Icons.person, title: 'profile'),
   };
 }

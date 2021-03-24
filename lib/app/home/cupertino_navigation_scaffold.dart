@@ -33,7 +33,7 @@ class CupertinoNavigationScaffold extends StatelessWidget {
         ],
         onTap: (index) => onSelectTab(TabItem.values[index]),
       ),
-      tabBuilder: (context, __) => builder(context),
+      tabBuilder: (context, _) => builder(context),
     );
   }
 }
